@@ -42,9 +42,9 @@ body {
     &__title {
         padding: 1rem 0;
 
-        // &::first-letter {
-        //     text-transform: uppercase;
-        // }
+        &::first-letter {
+            text-transform: uppercase;
+        }
     }
 
     &__data {
@@ -84,6 +84,20 @@ body {
     //     background-color: rgba(255, 255, 255, .3)
     // }
 
+    &__location {
+        border: 1px solid white;
+    }
+    &__net{
+        display: flex;
+    }
+
+    &__pool, &__miner {
+        display: flex;
+        flex-direction: column; 
+    }
+    &__pool-box, &__miner-box {
+        display: flex;
+    }
 }
 
 .buttons {

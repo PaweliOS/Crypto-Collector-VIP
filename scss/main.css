@@ -40,6 +40,9 @@ body {
 .crypto__title {
   padding: 1rem 0;
 }
+.crypto__title::first-letter {
+  text-transform: uppercase;
+}
 .crypto__data {
   margin-bottom: 2rem;
 }
@@ -60,6 +63,19 @@ body {
 .crypto__Ex-logo {
   width: 30px;
   margin-right: 1rem;
+}
+.crypto__location {
+  border: 1px solid white;
+}
+.crypto__net {
+  display: flex;
+}
+.crypto__pool, .crypto__miner {
+  display: flex;
+  flex-direction: column;
+}
+.crypto__pool-box, .crypto__miner-box {
+  display: flex;
 }
 
 .buttons {
