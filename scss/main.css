@@ -1,0 +1,86 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: "Sono", sans-serif;
+  font-size: 62.5%;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(2, 8, 62);
+}
+
+.header {
+  padding: 2rem 4rem;
+}
+.header__h1 {
+  color: white;
+  text-transform: uppercase;
+  font-weight: 100;
+  font-size: 4rem;
+}
+.header__hero-img {
+  text-align: center;
+}
+
+.crypto {
+  padding: 2rem 0;
+}
+.crypto__box {
+  color: white;
+  font-size: 2rem;
+}
+.crypto__title {
+  padding: 1rem 0;
+}
+.crypto__data {
+  margin-bottom: 2rem;
+}
+.crypto__coins {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 250px;
+  border: 1px solid white;
+  padding: 0.5rem;
+  justify-content: center;
+}
+.crypto__coins--text {
+  margin-bottom: 0;
+}
+.crypto__coins--title {
+  text-transform: uppercase;
+}
+.crypto__Ex-logo {
+  width: 30px;
+  margin-right: 1rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+.buttons__btns {
+  padding: 0.5rem 2rem;
+  color: white;
+  background-color: transparent;
+  border-color: white;
+  border-radius: 8px;
+  font-size: 2rem;
+}
+.footer {
+  text-align: center;
+  color: white;
+}
+.footer__text {
+  position: absolute;
+  bottom: 0;
+  font-size: 2rem;
+  text-transform: capitalize;
+}/*# sourceMappingURL=main.css.map */
