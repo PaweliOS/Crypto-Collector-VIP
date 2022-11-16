@@ -40,7 +40,7 @@ const URL_MINER = 'https://pool.rplant.xyz/api/walletEx/qogecoin/bq1q3x2jxmvz7w0
 
 let poolHashrateValue
 let minerHashrateValue
-const blocksday = 858+190
+const blocksday = 858
 
 // === poniżej dla jednego coina (ethereum) pełna informacja =====
 // const URL = 'https://api.coingecko.com/api/v3/coins/ethereum'
@@ -70,6 +70,9 @@ const blocksday = 858+190
 
 
 async function getPrice() {
+    setTimeout(activateCheckAllBtn, 10000)
+    checkAllBtn.setAttribute('class', 'btn btn-primary buttons__btns buttons__btn-checkAll fs-3 disabled')
+
     const respBtc = await axios.get(URL_BTC_USD)
     const respEth = await axios.get(URL_ETH_USD)
     const respExbitronQoge = await axios.get(URL_EXBITRON_BTC)
@@ -79,10 +82,6 @@ async function getPrice() {
     const respRplantPoolHashrate = await axios.get(URL_POOL_HASHRATE)
 
     const respRplantPoolMiner = await axios.get(URL_MINER)
-    // const respRplantPoolMiner = await axios.get(URL_MINER)
-
-    // console.log(respExbitronQoge.data.bids[0].price)
-    // console.log(respExbitronQoge.data.bids[0].price)
     
     qogePrice.textContent = respExbitronQoge.data.bids[0].price + ' USD'
     plsrPrice.textContent = respExbitronPlsr.data.bids[0].price + ' USD'
@@ -97,10 +96,14 @@ async function getPrice() {
     minerHashrate.textContent = minerHashrateValue
     minerShares.textContent = respRplantPoolMiner.data.shares
     minerCoinsDay.textContent = roundX_Y(calcCoinsDay(poolHashrateValue, minerHashrateValue), 1)
-    console.log(respRplantPoolMiner.data.miners.length)
+    // console.log(respRplantPoolMiner.data.miners.length)
+    
 
 }
 
+function activateCheckAllBtn() {
+    checkAllBtn.classList.remove('disabled')
+}
 
 const calcCoinsDay = (poolHashrateValue, minerHashrateValue) => {
     let output = minerHashrateValue * blocksday / poolHashrateValue * 50
@@ -113,11 +116,5 @@ const roundX_Y = (x,y) => {
     let output = (Math.round(x * Math.pow(10, y)))/Math.pow(10, y)
     return output
 }
-
-
-// for (n = 0; n = 3600; n++){
-//     sleep(1000).console.log('ciach')
-    
-// }
 
 checkAllBtn.addEventListener('click', getPrice)

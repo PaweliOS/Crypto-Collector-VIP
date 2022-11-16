@@ -92,20 +92,17 @@ body {
   justify-content: center;
 }
 .buttons__btns {
-  padding: 0.5rem 2rem;
-  color: white;
-  background-color: transparent;
-  border-color: white;
-  border-radius: 8px;
-  font-size: 2rem;
+  width: 100px;
+  height: 40px;
 }
+
 .footer {
   text-align: center;
   color: white;
 }
 .footer__text {
-  position: absolute;
-  bottom: 0;
-  font-size: 2rem;
+  position: relative;
+  margin-top: 4rem;
+  font-size: 1rem;
   text-transform: capitalize;
 }/*# sourceMappingURL=main.css.map */
