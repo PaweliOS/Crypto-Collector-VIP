@@ -59,6 +59,7 @@ body {
 }
 .crypto__coins--title {
   text-transform: uppercase;
+  margin-right: 1rem;
 }
 .crypto__Ex-logo {
   width: 30px;
@@ -69,10 +70,18 @@ body {
 }
 .crypto__net {
   display: flex;
+  padding: 1rem;
+}
+.crypto__net-title {
+  margin-right: 1rem;
 }
 .crypto__pool, .crypto__miner {
   display: flex;
   flex-direction: column;
+  padding: 1rem;
+}
+.crypto__pool-title, .crypto__miner-title {
+  margin-right: 1rem;
 }
 .crypto__pool-box, .crypto__miner-box {
   display: flex;

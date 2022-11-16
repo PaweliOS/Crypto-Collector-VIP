@@ -66,6 +66,7 @@ body {
         }
         &--title {
             text-transform: uppercase;
+            margin-right: 1rem;
         }
 
     }
@@ -89,12 +90,22 @@ body {
     }
     &__net{
         display: flex;
+        padding: 1rem;
+    }
+    &__net-title {
+        margin-right: 1rem;
     }
 
     &__pool, &__miner {
         display: flex;
         flex-direction: column; 
+        padding: 1rem;
     }
+
+    &__pool-title, &__miner-title {
+        margin-right: 1rem;
+    }    
+
     &__pool-box, &__miner-box {
         display: flex;
     }
