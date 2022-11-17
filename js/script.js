@@ -15,6 +15,8 @@ const minerHashrate = document.querySelector('.crypto__miner-hashrate')
 const minerShares = document.querySelector('.crypto__miner-shares')
 const minerCoinsDay = document.querySelector('.crypto__miner-coins-day')
 
+const warning = document.querySelector('.warning')
+const warningButton = document.querySelector('.warning__button')
 
 
 
@@ -26,7 +28,7 @@ const USD = 'usd'
 const ETH = 'ethereum'
 const EXBITRON_qogeusdt = 'qogeusdt'
 const EXBITRON_plsrusdt = 'plsrusdt'
-const URL_BTC_USD = 'https://api.coingecko.com/api/v3/simple/price?ids='+BTC+'&vs_currencies='+USD
+const URL_BTC_USD = 'https://sssapi.coingecko.com/api/v3/simple/price?ids='+BTC+'&vs_currencies='+USD
 const URL_ETH_USD = 'https://api.coingecko.com/api/v3/simple/price?ids=' + ETH + '&vs_currencies=' + USD
 
 const URL_EXBITRON_BTC = 'https://www.exbitron.com/api/v2/peatio/public/markets/'+EXBITRON_qogeusdt+'/order-book'
@@ -78,7 +80,7 @@ async function getPrice() {
         .then((resp) => {
             btcPrice.textContent = resp.data.bitcoin.usd + ' USD'
         })
-        .catch(() => (alert("Nie udało się pobrać wszystkich danych !")))
+        .catch(() => { warning.classList.remove('d-none') })
     //(warning.textContent = 'Nie udało połączyć się z serwerem!')
     //console.log('błąd')
     const respEth = await axios.get(URL_ETH_USD)
@@ -124,4 +126,9 @@ const roundX_Y = (x,y) => {
     return output
 }
 
+const hideWarning = () => {
+    warning.classList.add('d-none')
+}
+
 checkAllBtn.addEventListener('click', getPrice)
+warningButton.addEventListener('click', hideWarning)
