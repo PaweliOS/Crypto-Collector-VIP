@@ -109,6 +109,20 @@ body {
     }
 }
 
+.warning {
+    // top: 1rem;
+    display: flex;
+    flex-direction: column;
+    margin-top: -8rem;
+    &__button {
+        align-self: center;
+        width: 60px;
+        font-size: 1.5rem;
+        padding: 0 1rem;
+    }
+}
+
+
 .footer {
     text-align: center;
     color: white;

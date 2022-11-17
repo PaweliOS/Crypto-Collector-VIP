@@ -97,6 +97,18 @@ body {
   height: 40px;
 }
 
+.warning {
+  display: flex;
+  flex-direction: column;
+  margin-top: -8rem;
+}
+.warning__button {
+  align-self: center;
+  width: 60px;
+  font-size: 1.5rem;
+  padding: 0 1rem;
+}
+
 .footer {
   text-align: center;
   color: white;

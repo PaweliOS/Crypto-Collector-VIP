@@ -26,7 +26,7 @@ const USD = 'usd'
 const ETH = 'ethereum'
 const EXBITRON_qogeusdt = 'qogeusdt'
 const EXBITRON_plsrusdt = 'plsrusdt'
-const URL_BTC_USD = 'https://ssapi.coingecko.com/api/v3/simple/price?ids='+BTC+'&vs_currencies='+USD
+const URL_BTC_USD = 'https://api.coingecko.com/api/v3/simple/price?ids='+BTC+'&vs_currencies='+USD
 const URL_ETH_USD = 'https://api.coingecko.com/api/v3/simple/price?ids=' + ETH + '&vs_currencies=' + USD
 
 const URL_EXBITRON_BTC = 'https://www.exbitron.com/api/v2/peatio/public/markets/'+EXBITRON_qogeusdt+'/order-book'
@@ -40,7 +40,7 @@ const URL_MINER = 'https://pool.rplant.xyz/api/walletEx/qogecoin/bq1q3x2jxmvz7w0
 
 let poolHashrateValue
 let minerHashrateValue
-const blocksday = 710
+const blocksday = 669
 
 // === poniżej dla jednego coina (ethereum) pełna informacja =====
 // const URL = 'https://api.coingecko.com/api/v3/coins/ethereum'
@@ -78,7 +78,7 @@ async function getPrice() {
         .then((resp) => {
             btcPrice.textContent = resp.data.bitcoin.usd + ' USD'
         })
-        .catch(() => (console.log('błąd połączenia')))
+        .catch(() => (alert("Nie udało się pobrać wszystkich danych !")))
     //(warning.textContent = 'Nie udało połączyć się z serwerem!')
     //console.log('błąd')
     const respEth = await axios.get(URL_ETH_USD)
