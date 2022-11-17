@@ -28,7 +28,7 @@ const USD = 'usd'
 const ETH = 'ethereum'
 const EXBITRON_qogeusdt = 'qogeusdt'
 const EXBITRON_plsrusdt = 'plsrusdt'
-const URL_BTC_USD = 'https://sssapi.coingecko.com/api/v3/simple/price?ids='+BTC+'&vs_currencies='+USD
+const URL_BTC_USD = 'https://api.coingecko.com/api/v3/simple/price?ids='+BTC+'&vs_currencies='+USD
 const URL_ETH_USD = 'https://api.coingecko.com/api/v3/simple/price?ids=' + ETH + '&vs_currencies=' + USD
 
 const URL_EXBITRON_BTC = 'https://www.exbitron.com/api/v2/peatio/public/markets/'+EXBITRON_qogeusdt+'/order-book'
