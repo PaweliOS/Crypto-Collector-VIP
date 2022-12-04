@@ -9,11 +9,15 @@ const netHashrate = document.querySelector('.crypto__net-hashrate')
 
 const poolWorkers = document.querySelector('.crypto__pool-workers')
 const poolHashrate = document.querySelector('.crypto__pool-hashrate')
+const poolPercentageHashrate = document.querySelector('.crypto__pool-percentage-hashrate')
 
 const minerWorkers = document.querySelector('.crypto__miner-workers')
 const minerHashrate = document.querySelector('.crypto__miner-hashrate')
 const minerShares = document.querySelector('.crypto__miner-shares')
 const minerCoinsDay = document.querySelector('.crypto__miner-coins-day')
+const minerImmature = document.querySelector('.crypto__miner-immature')
+const paidToday = document.querySelector('.crypto__miner-paid-today')
+const paidBrutto = document.querySelector('.crypto__miner-paid-brutto')
 
 const warning = document.querySelector('.warning')
 const warningButton = document.querySelector('.warning__button')
@@ -42,7 +46,10 @@ const URL_MINER = 'https://pool.rplant.xyz/api/walletEx/qogecoin/bq1q3x2jxmvz7w0
 
 let poolHashrateValue
 let minerHashrateValue
+let minerImmatureValue
 const blocksday = 669
+let qogePriceUSDT
+let paidTodayValue
 
 // === poniżej dla jednego coina (ethereum) pełna informacja =====
 // const URL = 'https://api.coingecko.com/api/v3/coins/ethereum'
@@ -92,19 +99,29 @@ async function getPrice() {
 
     const respRplantPoolMiner = await axios.get(URL_MINER)
     
-    qogePrice.textContent = respExbitronQoge.data.bids[0].price + ' USD'
+    qogePriceUSDT = respExbitronQoge.data.bids[0].price
+    qogePrice.textContent = qogePriceUSDT + ' USD'
     plsrPrice.textContent = respExbitronPlsr.data.bids[0].price + ' USD'
     // btcPrice.textContent = respBtc.data.bitcoin.usd + ' USD'
     ethPrice.textContent = respEth.data.ethereum.usd + ' USD'
-    netHashrate.textContent = respRplantNetHashrate.data.pools.qogecoin.poolStats.networkSols + ' kH/s'
+    netHashrate.textContent = respRplantNetHashrate.data.pools.qogecoin.poolStats.networkSols/1000 + ' kH/s'
     poolWorkers.textContent = respRplantPoolWorkers.data.pools.qogecoin.poolStats.workerCount 
     poolHashrateValue = respRplantPoolHashrate.data.pools.qogecoin.hashrate
-    poolHashrate.textContent = poolHashrateValue
+    poolHashrate.textContent = poolHashrateValue / 1000 + ' kH/s'
+    poolPercentageHashrate.textContent = roundX_Y((poolHashrateValue/respRplantNetHashrate.data.pools.qogecoin.poolStats.networkSols*100), 1) + ' %'
+
     minerWorkers.textContent = respRplantPoolMiner.data.miners.length
     minerHashrateValue = respRplantPoolMiner.data.hashrate
-    minerHashrate.textContent = minerHashrateValue
+    minerHashrate.textContent = minerHashrateValue/1000 + ' kH/s'
     minerShares.textContent = respRplantPoolMiner.data.shares
-    minerCoinsDay.textContent = roundX_Y(calcCoinsDay(poolHashrateValue, minerHashrateValue), 1)
+    
+    minerImmatureValue = respRplantPoolMiner.data.unsold
+    
+    minerImmature.textContent = minerImmatureValue
+    minerCoinsDay.textContent = roundX_Y(calcCoinsDay(minerImmatureValue, minerHashrateValue), 1)
+    paidTodayValue = respRplantPoolMiner.data.paid24h
+    paidToday.textContent = paidTodayValue
+    paidBrutto.textContent = roundX_Y((qogePriceUSDT * paidTodayValue), 2) + ' $'
     // console.log(respRplantPoolMiner.data.miners.length)
     
 
@@ -114,8 +131,15 @@ function activateCheckAllBtn() {
     checkAllBtn.classList.remove('disabled')
 }
 
-const calcCoinsDay = (poolHashrateValue, minerHashrateValue) => {
-    let output = minerHashrateValue * blocksday / poolHashrateValue * 50
+const calcCoinsDay = (minerImmatureValue, minerHashrateValue) => {
+    
+    if (minerImmatureValue > 1000) {
+        minerImmatureValue = minerImmatureValue
+    } else {
+        minerImmatureValue = 1000 + (1000-minerImmatureValue)
+    } 
+    
+    let output = minerHashrateValue/1000 * minerImmatureValue/10
     return output
     
 }

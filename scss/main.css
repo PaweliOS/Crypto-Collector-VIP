@@ -86,6 +86,9 @@ body {
 .crypto__pool-box, .crypto__miner-box {
   display: flex;
 }
+.crypto__miner-box-brutto {
+  color: aqua;
+}
 
 .buttons {
   display: flex;
