@@ -3,6 +3,7 @@ const btcPrice = document.querySelector('.crypto__coins--btc-price')
 const ethPrice = document.querySelector('.crypto__coins--eth-price')
 const qogePrice = document.querySelector('.crypto__coins--qoge-price')
 const plsrPrice = document.querySelector('.crypto__coins--plsr-price')
+const nexaPrice = document.querySelector('.crypto__coins--nexa-price')
 
 // ============ rplant ============//
 const netHashrate = document.querySelector('.crypto__net-hashrate')
@@ -32,11 +33,14 @@ const USD = 'usd'
 const ETH = 'ethereum'
 const EXBITRON_qogeusdt = 'qogeusdt'
 const EXBITRON_plsrusdt = 'plsrusdt'
+const EXBITRON_nexausdt = 'nexausdt'
 const URL_BTC_USD = 'https://api.coingecko.com/api/v3/simple/price?ids='+BTC+'&vs_currencies='+USD
 const URL_ETH_USD = 'https://api.coingecko.com/api/v3/simple/price?ids=' + ETH + '&vs_currencies=' + USD
 
 const URL_EXBITRON_BTC = 'https://www.exbitron.com/api/v2/peatio/public/markets/'+EXBITRON_qogeusdt+'/order-book'
-const URL_EXBITRON_PLSR = 'https://www.exbitron.com/api/v2/peatio/public/markets/'+EXBITRON_plsrusdt+'/order-book'
+const URL_EXBITRON_PLSR = 'https://www.exbitron.com/api/v2/peatio/public/markets/' + EXBITRON_plsrusdt + '/order-book'
+const URL_EXBITRON_NEXA = 'https://www.exbitron.com/api/v2/peatio/public/markets/' + EXBITRON_nexausdt + '/order-book'
+
 
 // ========= rplant ========= //
 const URL_NET_HASHRATE = 'https://pool.rplant.xyz/api/stats'
@@ -93,6 +97,7 @@ async function getPrice() {
     const respEth = await axios.get(URL_ETH_USD)
     const respExbitronQoge = await axios.get(URL_EXBITRON_BTC)
     const respExbitronPlsr = await axios.get(URL_EXBITRON_PLSR)
+    const respExbitronNexa = await axios.get(URL_EXBITRON_NEXA)
     const respRplantNetHashrate = await axios.get(URL_NET_HASHRATE)
     const respRplantPoolWorkers = await axios.get(URL_POOL_WORKERS)
     const respRplantPoolHashrate = await axios.get(URL_POOL_HASHRATE)
@@ -104,6 +109,7 @@ async function getPrice() {
     plsrPrice.textContent = respExbitronPlsr.data.bids[0].price + ' USD'
     // btcPrice.textContent = respBtc.data.bitcoin.usd + ' USD'
     ethPrice.textContent = respEth.data.ethereum.usd + ' USD'
+    nexaPrice.textContent = respExbitronNexa.data.bids[0].price + 'USD'
     netHashrate.textContent = respRplantNetHashrate.data.pools.qogecoin.poolStats.networkSols/1000 + ' kH/s'
     poolWorkers.textContent = respRplantPoolWorkers.data.pools.qogecoin.poolStats.workerCount 
     poolHashrateValue = respRplantPoolHashrate.data.pools.qogecoin.hashrate
