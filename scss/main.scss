@@ -41,10 +41,10 @@ body {
 
     &__title {
         padding: 1rem 0;
-
-        &::first-letter {
-            text-transform: uppercase;
-        }
+        text-transform: uppercase;
+        // &::first-letter {
+        //     text-transform: uppercase;
+        // }
     }
 
     &__data {

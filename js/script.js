@@ -5,14 +5,18 @@ const qogePrice = document.querySelector('.crypto__coins--qoge-price')
 const plsrPrice = document.querySelector('.crypto__coins--plsr-price')
 const nexaPrice = document.querySelector('.crypto__coins--nexa-price')
 
-// ============ rplant ============//
+// ============ qoge ============//
 const netHashrate = document.querySelector('.crypto__net-hashrate')
+// ============ nexa ============//
+const netHashrateNexa = document.querySelector('.crypto__net-hashrate--nexa')
+
 
 const poolWorkers = document.querySelector('.crypto__pool-workers')
 const poolHashrate = document.querySelector('.crypto__pool-hashrate')
 const poolPercentageHashrate = document.querySelector('.crypto__pool-percentage-hashrate')
 
 const minerWorkers = document.querySelector('.crypto__miner-workers')
+const minerWorkersNexa = document.querySelector('.crypto__miner-workers--nexa')
 const minerHashrate = document.querySelector('.crypto__miner-hashrate')
 const minerShares = document.querySelector('.crypto__miner-shares')
 const minerCoinsDay = document.querySelector('.crypto__miner-coins-day')
@@ -47,6 +51,7 @@ const URL_NET_HASHRATE = 'https://pool.rplant.xyz/api/stats'
 const URL_POOL_WORKERS = 'https://pool.rplant.xyz/api/stats'
 const URL_POOL_HASHRATE = 'https://pool.rplant.xyz/api/stats'
 const URL_MINER = 'https://pool.rplant.xyz/api/walletEx/qogecoin/bq1q3x2jxmvz7w0h74s7zys4jsnt7u80066fp3mqh4'
+const URL_MINER_NEXA = 'https://pool.rplant.xyz/api/walletEx/nexa/nqtsq5g5kl0c3a4s8nfp6czp7kxd0qedrytqdzphcg7nfp07'
 
 let poolHashrateValue
 let minerHashrateValue
@@ -103,6 +108,8 @@ async function getPrice() {
     const respRplantPoolHashrate = await axios.get(URL_POOL_HASHRATE)
 
     const respRplantPoolMiner = await axios.get(URL_MINER)
+    const respRplantPoolMinerNexa = await axios.get(URL_MINER_NEXA)
+
     
     qogePriceUSDT = respExbitronQoge.data.bids[0].price
     qogePrice.textContent = qogePriceUSDT + ' USD'
@@ -117,6 +124,8 @@ async function getPrice() {
     poolPercentageHashrate.textContent = roundX_Y((poolHashrateValue/respRplantNetHashrate.data.pools.qogecoin.poolStats.networkSols*100), 1) + ' %'
 
     minerWorkers.textContent = respRplantPoolMiner.data.miners.length
+    minerWorkersNexa.textContent = respRplantPoolMinerNexa.data.miners.length
+
     minerHashrateValue = respRplantPoolMiner.data.hashrate
     minerHashrate.textContent = minerHashrateValue/1000 + ' kH/s'
     minerShares.textContent = respRplantPoolMiner.data.shares

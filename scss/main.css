@@ -39,8 +39,6 @@ body {
 }
 .crypto__title {
   padding: 1rem 0;
-}
-.crypto__title::first-letter {
   text-transform: uppercase;
 }
 .crypto__data {
